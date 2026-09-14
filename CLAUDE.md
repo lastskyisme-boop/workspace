@@ -54,6 +54,19 @@ curl -sS https://juxingdaochang.cn/assets/index-XXXX.js | grep <这次新加的�
 ⚠️ 推 `deploy` 前先看一眼 `main` 上有没有**别的会话留下的、还没上线的提交**——
 按上面这么推会把它们一起发出去。要发就先把它们的守卫跑一遍，并且在汇报里说清楚。
 
+## ⚠️ 「不用 Vercel 了」≠「不用 Supabase 了」
+
+这两件事经常被一起说掉，但只有前半句是真的：
+
+- **Vercel**：2026-09-14 起彻底没关系了。`.online` 已停用，`vercel.json` 不参与部署，
+  账号上不服务任何生产流量。**看到 `vercel` 字样一律当历史遗留。**
+- **Supabase**：脱离的只是 **Supabase 云**（那个控制台 2026-09-01 起永久进不去，见 backlog E0）。
+  **自建的那一套还是这个产品的心脏** —— 广州那台 `~/supabase-self` 跑着
+  `db / meta / rest / auth / api-gw / studio` 六个容器，登录、注册、全部业务数据、
+  每一次读写都走它；`src/supabaseClient.js` 和 `shared/apiAuth.js` 都在调。
+  **改 schema、改登录设置、查数据，以后还是天天要碰 Supabase**，
+  只是路径从「云控制台」换成了「`docker exec psql` / 改 `~/supabase-self/.env`」（见下）。
+
 ## 这个环境的能力边界（碰到类似情况不用重新试错）
 
 **能**：
