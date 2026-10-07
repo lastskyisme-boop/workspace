@@ -26,7 +26,11 @@ cd /home/user && git -c credential.helper='!f() { echo username=oauth2; echo "pa
   用 Vercel CLI 从 `jp-dojo` 仓库根目录部署到生产，`curl` 出网（走代理）访问
   Gitee/Vercel/线上域名/DeepSeek API。
 - **不能**：SSH 到生产服务器；直接执行 SQL（写好后交给用户去 Supabase SQL Editor 跑，
-  给的 SQL 要单条、幂等、带验证查询）；Playwright/Chromium 访问外部 HTTPS 站点会
-  `ERR_CONNECTION_RESET`（但 `localhost`/`127.0.0.1` 可以，本地 vite + Playwright 能跑）。
+  给的 SQL 要单条、幂等、带验证查询）。
+- **Playwright/Chromium 上外部 HTTPS 站点**：直接开会 `ERR_CONNECTION_RESET`，要配两样
+  （办法记在 `jp-dojo/docs/小红书运营.md`「第 2 篇」）：`launch({ proxy: { server: process.env.HTTPS_PROXY } })`，
+  再用 `certutil -A -d sql:/root/.pki/nssdb -t "C,,"` 把 `/root/.ccr/ca-bundle.crt` 里的代理根证书加进浏览器
+  （先 `apt-get install libnss3-tools`）。`localhost`/`127.0.0.1` 不用配。
+- **Gitee 克隆偶尔断**（`gnutls_handshake`/`connection reset`）：是代理隧道抖，退避重试几次就过。
 
 有什么新想法、发现了新问题，随手记进 `jp-dojo/docs/backlog.md`，别指望聊天记录能留到下次。
