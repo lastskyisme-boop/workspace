@@ -25,8 +25,9 @@ cd /home/user && git -c credential.helper='!f() { echo username=oauth2; echo "pa
 - **能**：拉/改/提交/推 Gitee 代码，`npm run build`/跑本地测试脚本，
   用 Vercel CLI 从 `jp-dojo` 仓库根目录部署到生产，`curl` 出网（走代理）访问
   Gitee/Vercel/线上域名/DeepSeek API。
-- **不能**：SSH 到生产服务器；直接执行 SQL（写好后交给用户去 Supabase SQL Editor 跑，
-  给的 SQL 要单条、幂等、带验证查询）。
+- **不能**：SSH 到生产服务器；直接执行 SQL。线上是自托管的 Supabase，**没有网页 SQL Editor**：写好后给用户一段
+  能直接贴进服务器 shell 的 `docker exec -i supabase-db psql -U postgres -d postgres <<'SQL' … SQL`
+  （见 `jp-dojo/docs/自托管部署.md`「跑 SQL」）；SQL 要单条、幂等、带验证查询。
 - **Playwright/Chromium 上外部 HTTPS 站点**：直接开会 `ERR_CONNECTION_RESET`，要配两样
   （办法记在 `jp-dojo/docs/小红书运营.md`「第 2 篇」）：`launch({ proxy: { server: process.env.HTTPS_PROXY } })`，
   再用 `certutil -A -d sql:/root/.pki/nssdb -t "C,,"` 把 `/root/.ccr/ca-bundle.crt` 里的代理根证书加进浏览器
