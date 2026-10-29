@@ -1,4 +1,10 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(node scripts/baidu-push.mjs)",
+      "Bash(node scripts/baidu-push.mjs:*)"
+    ]
+  },
   "hooks": {
     "SessionStart": [
       {
