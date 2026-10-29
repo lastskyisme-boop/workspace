@@ -2,7 +2,12 @@
   "permissions": {
     "allow": [
       "Bash(node scripts/baidu-push.mjs)",
-      "Bash(node scripts/baidu-push.mjs:*)"
+      "Bash(node scripts/baidu-push.mjs:*)",
+      "Bash(node scripts/exercise-gaps.mjs:*)",
+      "Bash(npm ci)",
+      "Bash(npm install)",
+      "Bash(npm run build)",
+      "Bash(npm run test:*)"
     ]
   },
   "hooks": {
