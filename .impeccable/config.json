@@ -1,0 +1,18 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "cream-palette",
+      "side-tab",
+      "radial-halo"
+    ],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "bounce-easing",
+        "value": "cubic-bezier(.2, 1.6, .4, 1)",
+        "createdAt": "2026-10-29T06:22:09.576Z",
+        "reason": "Claude 10-29 判断:判子盖章动画(stampIn)的回弹是有意的,用户同意按忽略处理"
+      }
+    ]
+  }
+}
