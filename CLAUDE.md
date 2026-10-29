@@ -29,4 +29,9 @@ cd /home/user && git -c credential.helper='!f() { echo username=oauth2; echo "pa
   给的 SQL 要单条、幂等、带验证查询）；Playwright/Chromium 访问外部 HTTPS 站点会
   `ERR_CONNECTION_RESET`（但 `localhost`/`127.0.0.1` 可以，本地 vite + Playwright 能跑）。
 
+界面设计检查用 impeccable(`.claude/skills/impeccable`,10-29 装的,没装钩子):
+- 检测器在 `/home/user/workspace` 下跑才会读到 `.impeccable/config.json` 里的忽略名单(米色底、左侧色条、青海波这些是有意的设计)。
+- 扫网页:`IMPECCABLE_BROWSER` 由启动脚本设好;应用内页面要先起 vite,用 `e2e-harness.html` 跳过登录,再 `detect --cdp <端口>`。
+- 会话启动脚本已建好假 `.env`、装好依赖,`npm run test:*` 直接能跑。
+
 有什么新想法、发现了新问题，随手记进 `jp-dojo/docs/backlog.md`，别指望聊天记录能留到下次。
